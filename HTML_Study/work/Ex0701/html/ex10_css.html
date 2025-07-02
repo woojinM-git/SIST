@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /*
+      css 주석
+      현재문서에서 table이라는 태그를 만났을 때 다음의 내용을 적용시킨다.
+     */
+    table {
+      width: 400px;
+      border: 1px solid gray;
+      border-collapse: collapse;
+    }
+    td, th{
+      border: 1px solid gray;
+    }
+    thead>tr>th { /* thead안에 tr안에 th태그를 만나면 배경색을 지정한다. */
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+<article>
+  <header>
+    <h2>테이블 연습</h2>
+  </header>
+  <div>
+    <table id="t1">
+      <caption>사원 테이블</caption>
+      <thead>
+      <tr>
+        <th>사번</th>
+        <th>이름</th>
+        <th>직종</th>
+        <th>이메일</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>2000</td>
+        <th>홍길동</th>
+        <td>DEV</td>
+        <td>lee@korea.com</td>
+      </tr>
+      <tr>
+        <td>1120</td>
+        <th>을불</th>
+        <td>DEV</td>
+        <td>ul@korea.com</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="4">자료제공:SIST 인사과</td>
+      </tr>
+      </tfoot>
+    </table>
+    <p/>
+    <table id="t2">
+      <caption>사원 테이블</caption>
+      <thead>
+      <tr>
+        <th>사번</th>
+        <th>이름</th>
+        <th>직종</th>
+        <th>이메일</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>2000</td>
+        <td>홍길동</td>
+        <td>DEV</td>
+        <td>lee@korea.com</td>
+      </tr>
+      <tr>
+        <td>1120</td>
+        <td>을불</td>
+        <td>DEV</td>
+        <td>ul@korea.com</td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="4">자료제공:SIST 인사과</td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</article>
+</body>
+</html>

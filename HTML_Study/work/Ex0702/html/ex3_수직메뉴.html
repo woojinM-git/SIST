@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /* 아이디가 menu인 요소에게 적용 */
+    #menu{
+      /*border: 1px solid red;*/
+      list-style: none;
+      padding: 0; /* 안쪽 여백 제거 */
+      margin: 0; /* 바깥쪽 여백 제거 */
+      width: 200px; /* ul의 너비 지정 */
+      border-top: 2px solid blue; /* 제일 상단의 리스트만 top 추가 */
+    }
+    /* 아이디가 menu인 요소의 자식들 중 요소 이름이 li라는
+        요소들을 모두 선택하여 적용*/
+    #menu>li{
+      width: 196px;
+      height: 60px;
+      border: 2px solid blue;
+      border-top: none; /* 겹쳐진 선을 없애기 위해 윗선 제거 */
+      text-align: center;
+    }
+    #menu>li>a{
+      /*border: 1px solid red;*/
+      display: block; /* 인라인레벨을 크기설정이 가능한 블록레벨로 변경 */
+      width: 100%;
+      height: 100%;
+      line-height: 60px; /* 라인의 높이를 가운데로 설정 */
+      text-decoration: none; /* a태그의 밑줄 없애기 */
+      font-size: 30px;
+      background-color: #00bfff;
+      color: #fff;
+    }
+    #menu>li>a:hover{ /* 마우스가 올라왔을 때 */
+      background-color: #fff;
+      color: #00bfff;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <header>
+      <h2>수직메뉴 연습</h2>
+    </header>
+    <div>
+      <ul id="menu">
+        <li><a href="" id="mail">MAIL</a></li>
+        <li><a href="" id="blog">BLOG</a></li>
+        <li><a href="" id="cafe">CAFE</a></li>
+        <li><a href="" id="kin">지식IN</a></li>
+      </ul>
+    </div>
+  </article>
+</body>
+</html>

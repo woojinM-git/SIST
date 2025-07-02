@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <article>
+    <header>
+      <h2>폼 연습</h2>
+    </header>
+    <div>
+      <form action="" method="">
+        <label for="m_name">이름:</label>
+        <input type="text" id="m_name" name="m_name" placeholder="user name..."/>
+        <br/>
+
+        <!-- 콤보박스 -->
+        <select id="s2" name="s2">
+          <option value="seoul">서울</option> <!-- 선택시 서버로 전달될 때는 seoul이 전송됨 -->
+          <option value="incheon">인천</option> <!-- 선택시 서버로 전달될 때는 seoul이 전송됨 -->
+          <option value="dejhun">대전</option> <!-- 선택시 서버로 전달될 때는 seoul이 전송됨 -->
+          <option value="sejong">세종</option> <!-- 선택시 서버로 전달될 때는 seoul이 전송됨 -->
+          <option selected>::도시선택::</option>
+        </select>
+        <br/>
+
+        <!-- 체크박스 -->
+        <label for="ch1">취미</label>
+        <!--
+          체크박스들은 하나의 그룹을 구분하는 것이 name으로 구분한다.
+          그래서 하나인 그룹은 name이 같아야 한다. (이렇게 이름이 같은
+          요소들이 서버로 전달될 ㄸ는 하나의 배열로 전달된다.)
+        -->
+        <input type="checkbox" id="ch1" name="hobby" value="movie"/>
+        <span>영화</span>&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="ch2" name="hobby" value="music"/>
+        <span>음악</span>&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="ch3" name="hobby" value="reading"/>
+        <span>독서</span>&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="ch4" name="hobby" value="game"/>
+        <span>게임</span>
+        <br/>
+
+        <!-- 전화번호 -->
+        <label for="tel">전화번호</label>
+        <input type="tel" id="tel" name="tel" placeholder="cell phone"/>
+        <br/>
+
+        <select id="phone1" name="phone">
+          <option value="02">010</option>
+          <option value="010">010</option>
+          <option value="011">011</option>
+          <option value="017">017</option>
+        </select>
+        <span>-</span>
+        <input type="number" id="phone2" name="phone"/>
+        <span>-</span>
+        <input type="number" id="phone3" name="phone"/>
+        <br/>
+
+        <!-- 이메일 -->
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" placeholder="email..."/>
+        <br/>
+
+        <!-- 성별 : 라디어버튼은 그룹이 형성되어야 한다.
+          체크박스와 같이 anme으로 그룹을 지정한다. -->
+
+        <!-- 설명란 -->
+        <label for="desc">설명:</label>
+        <textarea rows="5" cols="50" id="desc" name="desc"></textarea>
+        <br/>
+
+        <!-- 첨부파일 -->
+        <label for="file">첨부파일:</label>
+        <input type="file" id="file" name="file" placeholder="file..."/>
+
+
+      </form>
+    </div>
+  </article>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      text-align: center;
+    }
+    /* CSS의 클래스 정의 */
+    .txtCenter {
+      text-align: center;
+    }
+    table {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    tbody>tr>td {
+      border: 1px solid black;
+    }
+    #t1{
+      border: 0px;
+    }
+    #t1>tbody>tr>td{
+      border: 0px;
+    }
+    table>caption{
+      text-indent: -9999px;
+    }
+  </style>
+</head>
+<body>
+<article>
+  <header>
+    <h2>문제1</h2>
+  </header>
+  <div>
+    <table id="t1">
+      <caption>이미지 테이블</caption>
+      <tbody>
+      <tr>
+        <td><img src="../img/1.jpg"/></td>
+        <td class="txtCenter">고요함</td>
+        <td><img src="../img/2.jpg"/></td>
+      </tr>
+      <tr>
+        <td class="txtCenter">외침속</td>
+        <td><img src="../img/3.jpg"/></td>
+        <td class="txtCenter">항해</td>
+      </tr>
+      <tr>
+        <td><img src="../img/4.jpg"/></td>
+        <td class="txtCenter">봄의옷</td>
+        <td><img src="../img/5.jpg"/></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <header>
+    <h2>문제2</h2>
+  </header>
+  <div>
+    <table id="t2">
+      <caption>데이터 테이블</caption>
+      <!-- 각 컬럼별 너비를 지정할 수 있다 -->
+      <colgroup>
+        <col width="100px"/> <!-- 첫번째 컬럼의 너비 설정 -->
+        <col width="150px"/> <!-- 두번째 컬럼의 너비 설정 -->
+        <col width="100px"/> <!-- 세번째 컬럼의 너비 설정 -->
+      </colgroup>
+      <tbody>
+      <tr>
+        <td rowspan="3">사진</td>
+        <td colspan="2">타이틀입니다</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+        <td>데이터</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+        <td>데이터</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+        <td>데이터</td>
+        <td>데이터</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+        <td rowspan="3" colspan="2">병합</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+      </tr>
+      <tr>
+        <td>데이터</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
+</body>
+</html>

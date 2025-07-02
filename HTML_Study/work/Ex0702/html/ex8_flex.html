@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    article>div{
+      display: flex;
+      flex-direction: row;
+    }
+    article>div>div{
+      width: 200px;
+      height: 200px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+    div.box{
+      background-image: url("../img/cap.PNG");
+      /*background-repeat: repeat-x;*/
+      background-repeat: no-repeat;
+      background-position: center ;
+    }
+    #box2{
+      /*padding: 50px;*/
+    }
+  </style>
+</head>
+<body>
+<article>
+  <header>
+    <h2>박스개념</h2>
+  </header>
+  <div>
+    <div id="box1" class="box">BOX1</div>
+    <div id="box2">BOX2</div>
+    <div id="box3" class="box">BOX3</div>
+  </div>
+</article>
+</body>
+</html>

@@ -1,0 +1,104 @@
+@charset "utf-8";
+@import "reset.css";
+#wrap{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+/******* 상단영역 *******/
+#header{
+  width: 970px;
+  height: 120px;
+  margin: 0 auto;
+  /*border: 1px solid red;*/
+  position: relative; /* 절대적인 영역으로 잡아주기 */
+}
+/*
+  header안에 있는 h1태그의 너비를 181px로 하고, 높이는 59px로 하자!
+  그리고 배경이미지는 img폴더에 있는 logo.png로 지정한 후
+  텍스는 보이지 않도록 하자!
+ */
+#header>h1{
+  width: 181px;
+  height: 59px;
+  background: url(../img/logo.png) no-repeat;
+  text-indent: -9999px;
+}
+/***** 메뉴작업 *****/
+#header .gnb{ /* ul태그를 의미함 */
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+#header .gnb>li{
+  flex: 1 1 194px;
+  height: 100px;
+  background: #ff5001;
+}
+#header .gnb>li>a{
+  display: block;
+  width: auto;
+  height: 100%;
+  text-align: center;
+}
+#header .gnb>li>a>span.menu{
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 15px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  background: url(../img/gnb_bult.png) no-repeat;
+  padding-left: 25px;
+}
+/* 각 메뉴들의 아이콘 변경 */
+#header .gnb>li>a>span.m01{ background-position: 0 0; }
+#header .gnb>li>a>span.m02{ background-position: 0 -22px; }
+#header .gnb>li>a>span.m03{ background-position: 0 -44px; }
+#header .gnb>li>a>span.m04{ background-position: 0 -66px; }
+#header .gnb>li>a>span.m05{ background-position: 0 -88px; }
+
+/* 푸터영역 */
+#footer{
+  width: auto;
+  /* 안쪽여백 좌/우 0px로 하고, 위쪽은 40px로, 아래쪽은 50px로 지정하자! */
+  padding: 40px 0 50px; /* 위 좌/우 아래 */
+  background: #eee;
+  margin-top: 50px;
+}
+#footer .footer_area{
+  width: 900px;
+  margin: auto;
+}
+#footer .footer_guide{
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+#footer .footer_guide li{
+  display: inline-block;
+  padding: 0 10px;
+  border-right: 1px solid #999;
+}
+#footer .footer_guide li:last-child{ /* last-child = 마지막 자식에게 적용함 */
+  border-right: none;
+}
+#footer .footer_guide li a{
+  color: #777;
+  font-size: 12px;
+  font-weight: bold;
+}
+#footer .footer_guide li a:hover{
+  color: #ff4f00;
+}
+#footer address{
+  font-size: 12px;
+  color: #777;
+  padding-bottom: 6px;
+}
+#footer .copyright{
+  font-size: 12px;
+}

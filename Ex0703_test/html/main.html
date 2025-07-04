@@ -5,60 +5,7 @@
   <title>Title</title>
   <!-- 외부 CSS 연결하기 -->
   <link rel="stylesheet" href="../css/common.css">
-
-  <style>
-    #contents {
-      width: 970px;
-      height: auto;
-      margin: auto;
-      /*border: 1px solid red;*/
-    }
-    #contents .main_img {
-      width: 100%;
-      height: 360px;
-    }
-    #contents .main_news {
-      /*border: 1px solid red;*/
-      display: flex;
-      padding: 50px;
-      background: #eee;
-    }
-    #contents .main_news .news_type01 {
-      width: 245px;
-      margin: 0 21px;
-      /*border: 1px solid blue;*/
-      position: relative;
-      flex: 1;
-    }
-    .title {
-      width: 188px;
-      height: 20px;
-      margin: 5px 0;
-      background: url(../img/main_title.png) no-repeat;
-      text-indent: -9999px;
-    }
-    .subject {
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      word-break: break-all;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    .writer .more_view{
-      font-size: 12px;
-      color: #777;
-    }
-    .more_view {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-    #contents .main_news .fl .title{ background-position: 0 0; }
-    #contents .main_news .fc .title{ background-position: 0 -20px; }
-    #contents .main_news .fr .title{ background-position: 0 -40px; }
-  </style>
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
   <article id="wrap">
@@ -88,7 +35,7 @@
             <span class="thum_img">
               <img src="../img/@img01.png" alt="기사사진1"/>
             </span>
-            <span class="subject">
+            <span class="subject ellip">
               난청이지만 피아니스트가 되고픈 한별이의 점점점점점점
             </span>
           </a>
@@ -104,7 +51,7 @@
             <span class="thum_img">
               <img src="../img/@img02.png" alt="기사사진2"/>
             </span>
-            <span class="subject">
+            <span class="subject ellip">
               레티하씨 가정에 희마의 집 선물로 점점점점점점
             </span>
           </a>
@@ -119,8 +66,11 @@
           <a href="" class="news_src">
             <span class="thum_img">
               <img src="../img/@img03.png" alt="기사사진3"/>
+              <span id="btn_play" title="동영상 재생">
+                <a href="https://www.youtube.com/?app=desktop&hl=ko&gl=KR"></a>
+              </span>
             </span>
-            <span class="subject">
+            <span class="subject ellip">
               생수 1리터의 생명을 선물해 주세요
             </span>
           </a>
@@ -129,6 +79,65 @@
             <span class="more_view">자세히보기</span>
           </div>
         </div>
+      </div>
+
+      <div class="main_board">
+
+        <!--- 공지사항 --->
+        <div class="board_type01 fl">
+          <p class="title">공지사항</p>
+          <span class="more_view">
+            <a href="">더보기</a>
+          </span>
+          <ul class="notice">
+            <li>
+              <a href="" class="ellip">
+                T-together리뉴얼 오픈되었습니다.
+              </a>
+              <span class="date">2025.07.01</span>
+            </li>
+            <li>
+              <a href="" class="ellip">
+                GiveU 이벤트 당첨자 공지입니다.
+              </a>
+              <span class="date">2025.06.30</span>
+            </li>
+            <li>
+              <a href="" class="ellip">
+                앞으로 코딩의 활용분야 범위는 우리 생활 모두가 될 것입니다.
+              </a>
+              <span class="date">2025.06.29</span>
+            </li>
+          </ul>
+        </div>
+        <!-- 공지사항 끝 -->
+        <!---- 트위터 ---->
+        <div class="board_type01 fc">
+          <p class="title">T-together 트위터</p>
+          <span class="more_view">
+            <a href="">더보기</a>
+          </span>
+          <article class="art">
+            <span class="thum_img">
+              <img src="../img/@img04.png" alt="기사이미지"/>
+            </span>
+            <span class="src">
+              [캠페인] 뜨거웠던 여름이 빨리지나가고 시원한 바람과 오색의 단풍들이 사색의 시간을 만들어주는 계절에
+            </span>
+          </article>
+        </div>
+        <!--- 트위터 끝 --->
+        <!---- 배너 ---->
+        <div class="board_type01 fr">
+          <span class="banner b01">
+            <a href="">배너1</a>
+          </span>
+          <span class="banner b02">
+            <a href="">배너2</a>
+          </span>
+        </div>
+        <!--- 배너 끝 --->
+
       </div>
     </div>
     <!--================ 콘텐츠영역 끝 ===============-->

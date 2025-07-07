@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #age{
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<form>
+  <label for="b_year">태어난 년도:</label>
+  <!--<input type="number" id="b_year" name="bYear"/>-->
+  <input type="text" id="b_year" name="bYear"/>
+  <button type="button" onclick="ex(this.form)">확인</button>
+</form>
+  <label>당신의 나이</label>
+  <div id="age"></div>
+
+<script>
+  // 현재날짜를 객체로 구한다.
+  let now = new Data();
+  let c_Year = now.getFullYear();
+
+  function checkNumber(str) {
+    let age = document.getElementById("age");
+    if(str.length == 4){
+      if(!isNaN(str)){
+        age.innerHTML = c_Year - str;
+      }else{
+        alert("숫자만 입력하세요");
+        b_Year.value = "";
+        b_Year.focus();
+        return;
+      }
+    }else {
+      alert("4글자만 입력하세요");
+      b_Year.value = "";
+      b_Year.focus();
+      return;
+    }
+  }
+
+  function ex(frm) {
+    cnt = frm.b_year.value;
+    console.log(cnt);
+
+    checkNumber(cnt);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #table{
+      width: 350px;
+      border-collapse: collapse;
+    }
+    #table th, #table td{
+      border: 1px solid #000;
+      padding: 5px;
+    }
+    #table>caption{
+      text-indent: -99999px;
+      height: 0;
+    }
+    /*
+    id가 table인 요소의 thread안에 있는 tr들 중 첫번째 tr만
+    선택하여 선을 없애고, 오른쪽 맞춤을 설정하자!
+     */
+    #table thead>tr:first-child td{
+      border: none;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<article>
+  <header>
+    <h2>테이블 행 추가</h2>
+  </header>
+  <div>
+    <form action="" method="post">
+      <label for="s_name">이름:</label>
+      <input type="text" id="s_name" name="m_name"/>
+      &nbsp;&nbsp;
+      <label for="s_phone">연락처:</label>
+      <input type="text" id="s_phone" name="m_phone"/>
+      &nbsp;&nbsp;
+    </form>
+    <table id="table">
+      <caption>행추가 테이블</caption>
+      <thead>
+      <tr>
+        <td colspan="4">
+          <button type="button" onclick="exe()">행 추가</button>
+        </td>
+      </tr>
+      <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>연락처</th>
+        <th>삭제</th>
+      </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</article>
+<script>
+  let idx = 1;
+  let table = document.getElementById('table'); // ID 로 검색하겠다
+
+  function exe() {
+    // let name = document.getElementById('s_name').value.trim();
+    // let phone = document.getElementById('s_phone').value.trim();
+    let s_name2 = document.getElementById('s_name');
+    let s_phone2 = document.getElementById('s_phone');
+    let name = s_name2.value.trim();
+    let phone = s_phone2.value.trim();
+    console.log(name);
+    console.log(phone);
+    if(name == "" || name.length == 0) {
+      alert("이름을 입력하세요")
+      s_name2.value = '';
+      s_name2.focus();
+      return;
+    }
+    if(phone == '' || phone.length == 0) {
+      alert("번호를 입력하세요")
+      s_phone2.value = '';
+      s_phone2.focus();
+      return;
+    }
+    // 테이블에서 행추가라는 것은 tr을 생성하고, 필요한 수만큼 td를 생성한 후
+    // tr에 추가해야 한다. rt에 추가할 td를 3개 만들자!
+    let td1 = document.createElement('td'); // <td></td>
+    let td2 = document.createElement('td'); // <td></td>
+    let td3 = document.createElement('td'); // <td></td>
+    let td4 = document.createElement('td'); // <td></td>
+
+    // 첫번째 td에 번호를 넣어보자 (<td>1</td>)
+    td1.innerText = idx++;
+    td2.innerText = name;
+    td3.innerHTML = phone;
+
+    // 4번째 컬럼에 버튼객체를 생성해서 추가한다.
+    // 먼저 추가할 button객체를 생성하자!
+    let bt = document.createElement('button'); // <button></button>
+    bt.type = 'button'; // <button type='button'></button>
+    bt.id = 'bt' + idx; // <button type="button" id="bt1"></button>
+    bt.innerText = "삭제"; // <button type="button" id="bt1">삭제</button>
+
+    // 생성된 버튼객체에 onclick 이벤트 걸기
+    // <button type="button" id="bt1" onclick="함수">삭제</button>
+    bt.onclick = function () { // 익명함수
+      // 삭제버튼을 클릭할 때마다 수행하는 곳!
+      // table에 저장된 행번호를 얻어낸다.
+      // let num = table.rowNum;
+      // table.deleteRow(num);
+      table.deleteRow(table.rowNum);
+    };
+
+    // 위의 td들을 저장할 tr생성
+    let tr = document.createElement('tr'); // <tr></tr>
+
+    td4.appendChild(bt); // 4번째 td에 버튼객체 추가
+
+    // 생성된 tr안에 위에서 만든 td들을 자식요소로 추가한다.
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+
+    // tr에 마우스가 올라갈 때 현재 행번호를 table에 rowNum이라는 이름으로 저장한다.
+    // tr> onmouseover="함수" . . .
+    tr.onmouseover = function () {
+      // 각 tr에 마우스가 올뢌을 때 마다 수행하는 곳
+
+      // table객체에 rowNum이라는 이름으로 현재 행의 번호를 저장한다
+      table.rowNum = this.rowIndex;
+    }
+
+    // 원하는 테이블의 tbody를 얻어낸다.
+    let tbody = document.getElementById('table').children[2];
+
+    // 검색된 tbody에 위에서 생성한 tr을 자식으로 추가한다.
+    tbody.appendChild(tr);
+  }
+</script>
+</body>
+</html>

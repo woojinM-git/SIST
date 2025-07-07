@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dept">
+    <resultMap id="map1" type="pm.vo.DeptVO">
+<!--        <id property="loc_code" column="loc_code"/> &lt;!&ndash; 해당 문장을 넣지 않으면 loc_code가 null 임 &ndash;&gt;-->
+        <association property="lvo" javaType="pm.vo.LocVO" select="loc.getLoc" column="loc_code"/>
+    </resultMap>
+
+    <select id="all" resultMap="map1">
+        select * from dept
+    </select>
+
+    <select id="search_Loc" resultType="pm.vo.DeptVO" parameterType="String">
+        SELECT * FROM dept
+        WHERE loc_code = #{code}
+    </select>
+</mapper>

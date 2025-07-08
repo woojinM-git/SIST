@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h1>여기는 H1요소입니다</h1>
+  <h2>여기는 H2요소입니다</h2>
+  <h1>여기는 H1요소입니다</h1>
+  <h1>여기는 H1요소입니다</h1>
+  <h1>여기는 H1요소입니다</h1>
+  <h2>여기는 H2요소입니다</h2>
+  <br/>
+  <button type="button" id="btn1" onclick="test1()">자바스크립트</button>
+  <button type="button" id="btn2" onclick="test2()">제이쿼리</button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+  function test1(){
+    // 현재문서에서 h1태그들을 모두 가져와서 변수 h1_ar에 저장한다.
+    let h1_ar = document.getElementsByTagName("h1");
+
+    // 배열에 저장된 모든 태그들의 전경색을 하늘색으로 변경하자!
+    for(let i=0; i<h1_ar.length; i++){
+      h1_ar[i].style.color = "#00bfff";
+    }
+  }
+  function test2(){
+    // 현재문서에서 h2 태그들 모두에게 전경색을 빨강으로 변경하자!
+    $("h2").css("color","#ff0000"); // 현재 문서에서 h2를 모두 선택해라
+    $("#btn2").css("color","#f00"); // id를 선택해서 지정할때는 css에서 선택할때와 동일함
+    $("#btn2").html("jQuery"); // 문자를 바꿀때는 html 사용
+  }
+</script>
+</body>
+</html>

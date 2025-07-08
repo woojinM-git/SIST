@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #age{
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<form>
+  <label for="b_year">태어난 년도:</label>
+  <!--<input type="number" id="b_year" name="bYear"/>-->
+  <input type="text" id="b_year" name="bYear"/>
+  <button type="button" onclick="ex(this.form)">확인</button>
+</form>
+<label>당신의 나이</label>
+<div id="age"></div>
+
+<script>
+  // 현재날짜를 객체로 구한다.
+  let now = new Date();
+  let c_Year = now.getFullYear(); // 2025
+
+  function checkNumber(str) {
+    // 숫자인지? 아닌지? 를 판단하는 곳
+    // return !isNaN(str);
+    let value = true;
+
+    // 인자로 받은 str안에 문자가 하나라도 있다면 value에 false를 지정한다.
+    for(let i=0; i<str.length; i++){
+      // str의 i번째에 있는 문자의 코드값을 가져온다
+      let code = str.charCodeAt(i);
+      // 문자를 얻어낸다
+      let ch = str.charAt(i);
+      // if(code < 48 || code > 57){} // 코드값으로 비교
+      if(ch < '0' || ch > '9'){ // 문자값으로 비교
+        value = false;
+        break; // 반복문 탈출
+      }
+    } // for end
+    return value;
+  }
+  function ex(frm) {
+
+  }
+</script>
+</body>
+</html>

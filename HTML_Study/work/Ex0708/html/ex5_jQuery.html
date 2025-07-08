@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <button type="button" id="btn">CSS적용</button>
+  <p/>
+  <p>p요소1</p>
+  <p>p요소2</p>
+  <p>p요소3</p>
+  <a href="">a요소1</a>
+  <p>p요소4</p>
+  <p>p요소5</p>
+  <p>p요소6</p>
+  <p>p요소7</p>
+  <a href="">a요소2</a>
+  <p>p요소8</p>
+  <p>p요소9</p>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    // $(document).ready(function(){
+    $(function(){
+      console.log("시작합니다.");
+
+      $("#btn").click(function(){
+        // 아이디가 btn인 버튼을 클릭할 때마다 수행하는 곳!!!
+        // p태그들의 전경색을 빨강으로 변경하자!
+        // $("p").css("color","#f00");
+
+        // 모두를 변경할 것이 아니라 짝수번째에 있는 p요소들만 변경한다면...
+        let ar = $("p");
+        for(let i = 0; i < ar.length; i++){
+          if(i%2 == 0){
+            // ar[i].style.color = "#f00";
+            // ar[i].css("color","#f00"); <-- 이건 JS와 jQuery를 함께 사용해서 오류
+            $(ar[i]).css("color","#f00");
+          }
+        }
+      })
+    });
+  </script>
+</body>
+</html>

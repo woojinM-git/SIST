@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #table{
+            margin: 0 30px;
+        }
+        #table tr{
+        }
+        #id{
+            width: 70px;
+        }
+        #name{
+            width: 70px;
+        }
+        .phone{
+            width: 60px;
+        }
+        #button_area{
+            position: relative;
+        }
+        #button{
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <header>
+        <h2>서블릿 인자전달 연습-4</h2>
+    </header>
+    <form action="/MyServlet4" method="post">
+        <table id="table">
+            <caption>개인정보</caption>
+            <tbody>
+            <tr>
+                <td>
+                    ID:
+                </td>
+                <td>
+                    <input type="text" name="id" id="id">
+                </td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>
+                    NAME:
+                </td>
+                <td>
+                    <input type="text" name="name" id="name">
+                </td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td>
+                    Phone:
+                </td>
+                <td colspan="3">
+                    <select name="phone">
+                        <option value="02">02</option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                    </select>
+                    <input type="text" name="phone" class="phone">
+                    <input type="text" name="phone" class="phone">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Hobby:</label>
+                </td>
+                <td colspan="3">
+                    <input type="checkbox" name="book">
+                    <label>독서</label>
+                    <input type="checkbox" name="movie">
+                    <label>영화</label>
+                    <input type="checkbox" name="game">
+                    <label>게임</label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="button_area">
+                <button type="button" id="button" onclick="exe(this.form)">저장</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</article>
+
+<script>
+    function exe(frm){
+        let id = frm.id.value;
+        let name = frm.name.value;
+        let phone = frm.phone.value;
+        // 유효성 검사 생략
+        if(id.trim().length == 0){
+            alert("아이디를 입력하세요")
+            return;
+        }
+        if(name.trim().length == 0){
+            alert("아이디를 입력하세요")
+            return;
+        }
+        if(phone.trim().length == 0){
+            alert("아이디를 입력하세요")
+            return;
+        }
+
+        // 폼에 있는 데이터를 서버로 보낸다.
+        // document.forms[0].submit();
+        frm.submit();
+    }
+</script>
+</body>
+</html>

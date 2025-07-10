@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<article>
+    <form action="/MyServlet5" method="post">
+        ID:<input type="text" id="id" name="id"/><br/>
+        Name:<input type="text" id="name" name="name"/><br/>
+        Phone:<select name="phone" id="phone1">
+        <option>02</option>
+        <option>010</option>
+    </select>
+        - <input type="text" id="phone2" name="phone"/> - <input type="text" id="phone3" name="phone"/><br/>
+        Hobby:<input type="checkbox" id="chk1" name="chk" value="독서"> <label for="chk1">독서</label>
+        <input type="checkbox" id="chk2" name="chk" value="영화"> <label for="chk2">영화</label>
+        <input type="checkbox" id="chk3" name="chk" value="게임"> <label for="chk3">게임</label><br/>
+        <button type="button" name="save" onclick="exe(this.form)">저장</button>
+    </form>
+</article>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    function exe(frm) {
+        let id = document.getElementById("id");
+        let name = document.getElementById("name");
+        let phone2 = document.getElementById("phone2");
+        let phone3 = document.getElementById("phone3");
+        /*let chk1 = $("#chk1").val();
+        let chk2 = $("#chk2").val();
+        let chk3 = $("#chk3").val();*/
+        // console.log(chk1);
+
+        if (id.value.trim().length == 0){
+            alert("아이디를 입력하세요")
+            document.getElementById("id").focus();
+            return;
+        }
+
+        if (name.value.trim().length == 0){
+            alert("이름을 입력하세요")
+            document.getElementById("name").focus();
+            return;
+        }
+
+        if (phone2.value.trim().length == 0 || phone3.value.trim().length == 0){
+            alert("전화번호를 입력하세요")
+            document.getElementById("phone2").focus();
+            return;
+        }
+
+        let chk = document.getElementsByName("chk");
+        console.log(chk);
+
+        for(let i=0; i<chk.length; i++){
+            console.log(chk[i].value);
+            if(chk[i].value == ""){
+                alert("취미를 선택하세요")
+                return;
+            }
+        } // for end
+            // frm.submit();
+
+
+
+
+
+    }
+</script>
+
+</body>
+</html>

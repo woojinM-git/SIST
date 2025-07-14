@@ -12,6 +12,10 @@
             height: 20px;
             text-align: center;
             padding:0px;
+
+        }
+        .inli{
+            display: inline-block;
         }
         .btn a{
             display: block;
@@ -48,18 +52,16 @@
     </style>
 </head>
 <body>
-
 <%
     String mode = request.getParameter("mode");
-    // HttpSession 객체가 session이라는 이름으로 이미 생성되어 제공되고 있다.
-    // 이런 HttpSession은 브라우저를 닫을 때 까지 사용 가능 함
-    // 세선에 "mvo"라는 이름으로 저장된 것이 있다면 로그인을 한 상태로 인지하자
-    // 세션으로부터 "mov"라는 이름으로 저장된 객체를 얻어냄
-    // object 형 변수 obj에 저장
+    //HttpSession객체가 session이라는 이름으로 이미 생성되어 제공되고 있다.
+    //이런 HttpSession은 브라우저를 닫을 때까지 사용가능함!
+    // 세션에 "mvo"라는 이름으로 저장된 것이 있다면 로그인을 한 상태로 인지하자!
+    // 먼저 세션으로부터 "mvo"라는 이름으로 저장된 객체를 얻어내어
+    // Object형 변수 obj에 저장하자!
     Object obj = session.getAttribute("mvo");
     if(obj == null){
 %>
-
 <div id="log_fail" class="show">
 
     <form action="" method="post">
@@ -83,9 +85,15 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <p class="btn">
+                    <p class="btn inli">
                         <a href="javascript:exe()">
                             로그인
+                        </a>
+                    </p>
+                    &nbsp;
+                    <p class="btn inli">
+                        <a href="reg.jsp">
+                            회원가입
                         </a>
                     </p>
                 </td>
@@ -95,14 +103,15 @@
     </form>
 </div>
 <%
-    } else { // obj가 null이 아닐 경우
-        // 이름을 얻기위해 Object 형으로 두면 안되고, MemVO로 형변환 해야함
+    }else{
+        //obj가  null이 아닐 경우다.
+        // 이름을 얻기 위해 Object형으로 두면 안되고, MemVO로 형변환을 해야
         // 이름을 얻을 수 있다.
         MemVO mvo = (MemVO) obj;
 %>
 <div id="log_suc" class="show">
 
-    <p>(<%=mvo.getM_name()%>)님 환영</p>
+    <p>(<%=mvo.getM_name() %>)님 환영</p>
     <p class="btn">
         <a href="logout.jsp">로그아웃</a>
     </p>
@@ -111,7 +120,7 @@
     </p>
 </div>
 <%
-    } // else의 끝
+    }//if문의 끝
 %>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -130,11 +139,6 @@
             pw.focus();
             return;
         }
-
-        <%
-        if(mode == 0){}
-        %>
-
         //요청할 서버경로를 변경한다.
         document.forms[0].action = "login.jsp";
         document.forms[0].submit();//서버로 보내기

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
+
 public class MemoDAO {
 
     public static List<MemoVO> getAll() {
@@ -26,7 +27,7 @@ public class MemoDAO {
 
         SqlSession ss = fService.getFactory().openSession(); // openSession(true) 를 하면 자동 커밋인데 좋은 방법이 아님
         int cnt = ss.insert("memo.add", mvo); // 값이 변경된 레코드의 수 -> 2가 반환되면 레코드가 2줄 변경된거임
-        
+
         if(cnt > 0) {
             ss.commit();
         }

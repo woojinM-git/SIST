@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="mybatis.vo.MemoVO" %>
 <%@ page import="mybatis.dao.MemoDAO" %>
+<%@ page import="mybatis.vo.MemVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -80,10 +81,11 @@
   String cmd = request.getParameter("cmd");
 
   // 로그인이 되었는지 알아내야 한다.
-  Object obj = session.getAttribute("mvo");
+  MemVO obj = (MemVO) session.getAttribute("mvo");
   if(obj == null)
     response.sendRedirect("index.jsp"); // 강제 페이지 이동
 
+  MemVO vo = obj;
 
   String msg = null;
   if(cmd != null && cmd.equals("1"))
@@ -106,6 +108,11 @@
         <p class="btn">
           <a href="javascript:writeMemo()">
             글쓰기
+          </a>
+        </p>
+        <p class="btn">
+          <a href="index.jsp">
+            전화면
           </a>
         </p>
       </td>
@@ -155,7 +162,7 @@
       <tr>
         <td><label for="writer">작성자:</label></td>
         <td>
-          <input type="text" id="writer" name="writer" value=""/>
+          <input type="text" id="writer" name="writer" value="<%=vo.getM_name() %>" readonly/>
         </td>
       </tr>
       <tr>

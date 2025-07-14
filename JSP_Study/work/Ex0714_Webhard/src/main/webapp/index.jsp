@@ -12,6 +12,7 @@
             height: 20px;
             text-align: center;
             padding:0px;
+            display: inline-block;
         }
         .btn a{
             display: block;
@@ -33,7 +34,7 @@
         }
 
         #s_id, #s_pw{
-            width: 80px;
+            width: 100px;
             border: 1px solid #27a;
             border-radius: 3px;
             padding: 4px;
@@ -88,6 +89,12 @@
                             로그인
                         </a>
                     </p>
+                    &nbsp;
+                    <p class="btn">
+                        <a href="reg.jsp">
+                            회원가입
+                        </a>
+                    </p>
                 </td>
             </tr>
             </tbody>
@@ -131,9 +138,6 @@
             return;
         }
 
-        <%
-        if(mode == 0){}
-        %>
 
         //요청할 서버경로를 변경한다.
         document.forms[0].action = "login.jsp";

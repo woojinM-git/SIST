@@ -20,13 +20,11 @@
     </header>
     <!-- table -->
     <article>
+        <jsp:useBean id="sb" class="shop.bean.ShopBean" scope="session"/>
+        <jsp:setProperty name="sb" property="p_num"/>
+        <%-- 위는 sb.setP_num(request.getParameter("p_num")와 같음--%>
         <%
-            request.setCharacterEncoding("UTF-8");
-
-            // prod_num 파라미터 받기
-            String p_num = request.getParameter("prod_num");
-
-            ProductVO pvo = ShopDAO.getProduct(p_num);
+            ProductVO pvo = sb.getProduct();
         %>
         <table class="table">
             <colgroup>

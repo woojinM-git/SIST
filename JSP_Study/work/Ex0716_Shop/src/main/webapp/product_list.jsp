@@ -38,7 +38,7 @@
       <td><%=pvo.getP_num()%></td>
       <td><img src="images/<%=pvo.getP_image_s()%>" width="100" height="95"></td>
       <td>
-        <a href="product_content.jsp?prod_num=<%=pvo.getP_num()%>">
+        <a href="product_content.jsp?p_num=<%=pvo.getP_num()%>">
           <%=pvo.getP_name()%>
         </a>
       </td>

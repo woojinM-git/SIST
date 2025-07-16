@@ -6,7 +6,6 @@
         // 인자로 전달된 File객체가 폴더여야 한다.
         // 이 폴더의 하위요소들의 File 용량을 모두 더해야 한다. 우선
         // 하위요소들을 모두 얻어낸다.
-        System.out.println(f);
         File[] list = f.listFiles();
         int size = 0;
 
@@ -93,9 +92,12 @@
         }
         .success{color: #00f; font-weight: bold; font-size: 11px;}
         .fail{color: #f00; font-weight: bold; font-size: 11px;}
-        div#my_alert{ display: none; }
+        div#my_alert, #upload_win, #folder_win{ display: none; }
         .w50{ width: 50px; }
         .w80{ width: 80px; }
+        .ui-dialog .ui-dialog-content {
+
+        }
     </style>
 </head>
 <body>
@@ -122,6 +124,10 @@
                 dir = dir + "/" + fname; // 아이디가 mmm 이라면 mmm/folder1
             }
         }
+
+        // dir이 구해진 후 나중에 파일올리기를 할 때 upload.jsp에서 필요하므로
+        // 세선에 미리 저장해 두자
+        session.setAttribute("dir", dir); // session에 값 저장하기 **********************************
 
         String r_path = application.getRealPath("/members/"+mvo.getM_id());
         useSize = useSize(new File(r_path));
@@ -154,7 +160,7 @@
                 <a href="javascript:selectFile()">파일올리기</a>
             </p>
             <p class="btn">
-                <a href="javascript:makeFolder()">폴더생성</a>
+                <a href="javascript:makeFDialog()">폴더생성</a>
             </p>
             <p class="btn">
                 <a href="javascript:exe()">파일생성</a>
@@ -212,6 +218,9 @@
                                 <%=f.getName()%>
                             </a>
                         <% } else { %>
+                            <a href="javascript:down('<%=f.getName()%>')">
+                                <%=f.getName()%>
+                            </a>
                         <%=f.getName()%>
                         <% } %>
                     </td>
@@ -228,11 +237,51 @@
     <input type="hidden" name="cPath" value="<%=dir%>"/>
 </form>
 
+
+    <!--
+    파일첨부가 되는 폼은 반드시 enctype이 multicart/form-data로 지정되어야 함!
+    폼에 파일을 첨부하게 되면 무조건 enctype이 위와 같아야 한다.
+     -->
+    <div id="upload_win" title="파일올리기">
+        <form action="upload.jsp" method="post" name="frm2" enctype="multipart/form-data">
+            <label for="selectFile">첨부파일:</label>
+            <%-- 다음의 cPath는 필요가 없음 --%>
+<%--            <input type="hidden" name="cPath" value="<%=dir%>"/>--%>
+            <%-- 파일선택기 --%>
+            <input type="file" id="selectFile" name="upload"/><br/>
+            <p class="btn">
+                <a href="javascript:upload()">보내기</a>
+            </p>
+            <p class="btn">
+                <a href="javascript:closeUpload()">닫 기</a>
+            </p>
+        </form>
+    </div>
+
+    <div id="folder_win" title="폴더만들기">
+        <form action="makeFolder.jsp" method="post" name="frm3">
+
+            <input type="hidden" name="cPath" value="<%=dir%>"/>
+            <label for="f_name">폴더명:</label>
+
+            <input type="text" id="f_name" name="f_name"/><br/>
+            <p class="btn">
+                <a href="javascript:makeFolder()">만들기</a>
+            </p>
+            <p class="btn">
+                <a href="javascript:closeFolder()">닫 기</a>
+            </p>
+        </form>
+    </div>
+
+
 <%
     } else
         response.sendRedirect("../index.jsp");
 %>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 <script>
     function home(){
         location.href = "myDisk.jsp";
@@ -254,6 +303,44 @@
         document.ff.action = "myDisk.jsp";
         document.ff.f_name.value = "";
         document.ff.submit();
+    }
+
+    function selectFile(){
+        $("#upload_win").dialog({
+            width:320
+        });
+    }
+    function upload(){
+        document.frm2.submit(); // 업로드
+    }
+    function closeUpload(){
+        $("#upload_win").dialog("close");
+    }
+
+    function makeFDialog(){
+        $("#folder_win").dialog();
+        width:320
+    }
+    function makeFolder(){
+        document.frm3.submit();
+    }
+    function closeFolder(){
+        $("#folder_win").dialog("close");
+    }
+
+    function down(fname){
+        // 인자로 받은 파일명(fname)을 현재 문서 안에 있는 ff라는 이름의 폼객체 안에
+        // 이름이 f_name이라는 input type="hidden" 요소의 값(value)로
+        // 지정한다.
+        document.ff.f_name.value = fname;
+
+        // ff라는 폼의 action을 변경하자!
+        document.ff.action = "download.jsp";
+        document.ff.submit();
+
+        // 다운로드가 진행되면서 현재페이지가 유지될 때
+        // 파일명이 지정되어 있으면 오류가 발생할 수 있으므로 파일명을 삭제한다.
+        document.ff.f_name.value = "";
     }
 </script>
 </body>

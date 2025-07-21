@@ -113,7 +113,7 @@ public class Controller extends HttpServlet {
             response.sendRedirect("Controller");
         else{
             // forward로 이동!
-            RequestDispatcher disp = request.getRequestDispatcher(viewPath);
+            RequestDispatcher disp = request.getRequestDispatcher(viewPath); // viewPath가 RequestDispatcher 를 무조건 지나가야함 
             disp.forward(request, response);
         }
     }

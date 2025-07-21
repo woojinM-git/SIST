@@ -88,6 +88,7 @@
                 <tr>
                     <td colspan="2">
                         <button type="button" id="send" class="btn">검색</button>
+                        <button type="button" id="send2" class="btn">검색(json)</button>
                     </td>
                 </tr>
                 </tfoot>
@@ -115,7 +116,8 @@
             modal: true,
             autoOpen: false,
             title: '검색',
-            resizable: false
+            resizable: false,
+            width: 330
         };
 
         $("#search_dig").dialog(option); // 다이얼로그창 등록
@@ -128,14 +130,41 @@
             $.ajax({
                 url: "Controller",
                 type: "post",
-                data: {type: "search",
-                searchType: $("#searchType").val(),
-                searchValue: $("#searchValue").val()}
-            }).done(function (res) {
+                data: {type: "search", searchType: $("#searchType").val(), searchValue: $("#searchValue").val()} <!-- 내가 사용(전달)하고자 하는 값을 지정해서 보내줘야한다. -->
+            }).done(function (res) { <!-- res에 자리에 위에서 controller에 요청하고 응답된 내용이 들어온다. -->
                 $("#search_dig").dialog("close");
                 console.log(res); <!-- res의 담긴 값을 보기 위한 console.log -->
                 <!-- res에는 all.jsp에서 반복문이 구동되어 쌓인 결과가 저장되고 -->
                 $("table.table>tbody").html(res); <!-- res에 담긴 <tr>태그들을 "table.table>tbody"의 자리에 넣어준다 -->
+            });
+        })
+
+        $("#send2").click(function (){
+            $.ajax({
+                url: "Controller",
+                type: "post",
+                data: {type: "search2", searchType: $("#searchType").val(), searchValue: $("#searchValue").val()} ,<!-- 내가 사용(전달)하고자 하는 값을 지정해서 보내줘야한다. -->
+                dataType: "json",
+            }).done(function (res) { <!-- res에 자리에 위에서 controller에 요청하고 응답된 내용이 들어온다. -->
+                console.log(res.items.length);
+                let str = "";
+                for (let i = 0; i < res.items.length; i++) {
+                    str += "<tr><td>";
+                    str += res.items[i].empno;
+                    str += "</td><td>";
+                    str += res.items[i].ename;
+                    str += "</td><td>";
+                    str += res.items[i].job;
+                    str += "</td><td>";
+                    str += res.items[i].sal;
+                    str += "</td><td>";
+                    str += res.items[i].hiredate;
+                    str += "</td><td>";
+                    str += res.items[i].deptno;
+                    str += "</td></tr>";
+                }
+                $("table.table>tbody").html(str);
+                $("#search_dig").dialog("close");
             });
         })
     });

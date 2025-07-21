@@ -12,11 +12,12 @@
         VALUE(#{empno}, #{ename}, #{job}, now())
     </insert>
 
+    <!-- 검색하는 select -->
     <select id="search" resultType="mybatis.vo.EmpVO" parameterType="Map">
         SELECT * FROM emp
         <trim prefix="where"> <!-- 동적쿼리 무조건 외우기 -->
             <choose>
-                <when test="searchType != null and searchType == 0">
+                <when test="searchType != null and searchType == 0"> <!-- map에서 인자로 넘어오는 타입의 이름으로 비교해야함 -->
                     empno = #{searchValue}
                 </when>
                 <when test="searchType != null and searchType == 1">
@@ -27,6 +28,7 @@
                 </when>
                 <when test="searchType != null and searchType == 3">
                     deptno = #{searchValue}
+                    <!-- #{col} = #{searchValue} -->
                 </when>
             </choose>
         </trim>

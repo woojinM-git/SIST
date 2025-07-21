@@ -41,8 +41,10 @@ public class EmpDAO {
 
         EmpVO[] ar = null;
         Map<String, String> map = new HashMap<>(); // 상속받아서
-        map.put("searchType", searchType);
-        map.put("searchValue", searchValue);
+        if(searchType != null)
+            map.put("searchType", searchType);
+        if(searchValue != null)
+            map.put("searchValue", searchValue);
 
         List<EmpVO> list = ss.selectList("emp.search", map);
         if(list != null && !list.isEmpty()){

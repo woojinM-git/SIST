@@ -44,7 +44,7 @@ public class Paging {
         end = nowPage*numPerPage;
 
         // 현재페이지 값에 따라 블럭의 시작페이지(statrPage) 구하자
-        startPage = (int)(((nowPage)-1)/pagePerBlock)*pagePerBlock+1;
+        startPage = (int)((nowPage-1)/pagePerBlock)*pagePerBlock+1;
 
         // 한 블럭의 마지막 페이지 값
         endPage = startPage+pagePerBlock-1;
@@ -76,6 +76,7 @@ public class Paging {
             this.totalPage++;
          */
         this.totalPage = (int)Math.ceil((double)totalCount/numPerPage);
+        // ceil이라는 함수로 인해 가장 가까운 수에서 높은 수 로 나온다.
     }
 
     public int getPagePerBlock() {

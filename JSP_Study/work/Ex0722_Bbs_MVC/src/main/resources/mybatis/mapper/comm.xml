@@ -11,6 +11,10 @@
     </select> <!-- mybatis는 무조건 list로 반환을 한다. -->
 
     <!-- 댓글 저장 -->
+    <insert id="add" parameterType="mybatis.vo.CommVO">
+        INSERT INTO comment_t(writer, content, pwd, ip, write_date, b_idx)
+        VALUES(#{writer}, #{content}, #{pwd}, #{ip}, NOW(), #{b_idx})
+    </insert>
 
     <!-- 댓글 삭제 -->
 

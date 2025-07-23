@@ -1,3 +1,4 @@
+<%@ page import="mybatis.vo.BbsVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -48,23 +49,28 @@
 </head>
 <body>
 <div id="bbs">
-  <form action="Controller?type=write" method="post"
+  <%
+    Object obj = request.getAttribute("bvo");
+    if(obj != null) {
+     BbsVO bvo = (BbsVO) obj;
+  %>
+  <form action="Controller?type=save" method="post"
         encType="multipart/form-data">
-    <input type="hidden" name="bname" value="BBS"/>
-    <table summary="게시판 글쓰기">
-      <caption>게시판 글쓰기</caption>
+    <input type="hidden" name="b_idx" value="<%=bvo.getB_idx()%>"/>
+    <table summary="게시판 글 수정">
+      <caption>게시판 글 수정</caption>
       <tbody>
       <tr>
         <th>제목:</th>
-        <td><input type="text" name="title" id="title" size="45"/></td>
+        <td><input type="text" name="title" id="title" size="45" value="<%=bvo.getSubject()%>"/></td>
       </tr>
       <tr>
         <th>이름:</th>
-        <td><input type="text" name="writer" id="writer" size="12"/></td>
+        <td><input type="text" name="writer" id="writer" size="12" value="<%=bvo.getWriter()%>"/></td>
       </tr>
       <tr>
         <th>내용:</th>
-        <td><textarea name="content" id="content" cols="50" rows="8"></textarea></td>
+        <td><textarea name="content" id="content" cols="50" rows="8"><%=bvo.getContent()%></textarea></td>
       </tr>
       <tr>
         <th>첨부파일:</th>
@@ -78,8 +84,8 @@
       -->
       <tr>
         <td colspan="2">
-          <input type="button" value="보내기"
-                 onclick="sendData()"/>
+          <input type="button" value="저장"
+                 onclick="saveData()"/>
           <input type="button" value="다시"/>
           <input type="button" value="목록"/>
         </td>
@@ -87,6 +93,13 @@
       </tbody>
     </table>
   </form>
+  <%
+    }else{
+%>
+  <h1>obj null</h1>
+<%
+    }
+  %>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -108,7 +121,7 @@
     });
   });
 
-  function sendData(){
+  function saveData(){
     // for(var i=0 ; i<document.forms[0].elements.length ; i++){
     //   if(document.forms[0].elements[i].value == ""){
     //     alert(document.forms[0].elements[i].name+
@@ -142,7 +155,10 @@
       return;
     }
 
-    document.forms[0].submit();
+    console.log("title : " + title);
+    console.log("writer : " + writer);
+    console.log("content : " + content);
+    // document.forms[0].submit();
   }
 
   function sendImage(file, editor){

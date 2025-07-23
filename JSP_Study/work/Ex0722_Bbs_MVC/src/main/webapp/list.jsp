@@ -98,8 +98,9 @@
                 <ol class="paging">
 <%
     Object obj1 = request.getAttribute("page");
+    Paging p = null;
     if(obj1 != null){
-        Paging p = (Paging)obj1;
+        p = (Paging)obj1;
         // 만약 page가 가지고 있는 startPage가 1이면
         // 이전 기능을 부여하면 안된다.
         if(p.getStartPage() < p.getPagePerBlock()){ // 1 < 5 / 6 < 10 ??
@@ -110,24 +111,30 @@
 %>
                     <li><a href="Controller?type=list&cPage=<%=p.getNowPage()-p.getPagePerBlock()%>">&lt;</a></li>
 <%
-        } // if문의 끝
+        } // 2 if문의 끝
         int startPage = p.getStartPage();
         int endPage = p.getEndPage();
         for(int i = startPage; i<=endPage; i++){
+            if(p.getNowPage() == i){
 %>
-                    <li <% if(p.getNowPage() == i){ %>class="now" <% } %>><%=i%></li>
+                    <li class="now"><%=i%></li>
 <%
-        }
-        if(p.getEndPage() < p.getTotalPage()){ // 5 < 1 ???
+            }else{
 %>
-                    <li><a href="Controller?type=list&cPage=<%=p.getNowPage()+p.getPagePerBlock()%>">&gt;</a></li>
+                        <li><a href="Controller?type=list&cPage=<%=i%>"><%=i%></a></li>
 <%
-        }else{
-%>
-                    <li class="disable">&gt;</li>
-<%
-        }
+            }
     }
+            if(p.getEndPage() < p.getTotalPage()){ // 5 < 1 ???
+%>
+                        <li><a href="Controller?type=list&cPage=<%=p.getNowPage()+p.getPagePerBlock()%>">&gt;</a></li>
+<%
+            }else{
+%>
+                        <li class="disable">&gt;</li>
+<%
+            }
+    } // first if end
 %>
                 </ol>
             </td>
@@ -142,20 +149,27 @@
     Object obj = request.getAttribute("ar");
     if(obj != null){
         BbsVO[] ar = (BbsVO[]) obj;
+        int i = 0;
         for(BbsVO vo : ar){
+            int num = p.getTotalCount() - ((p.getNowPage()-1)*p.getNumPerPage()+i);
 %>
         <tr>
-            <td><%=vo.getB_idx()%></td>
+            <td><%=num%></td>
             <td style="text-align: left">
-                <a href="#">
+                <a href="Controller?type=view&b_idx=<%=vo.getB_idx()%>&cPage=${nowPage}">
                     <%=vo.getSubject()%>
+                    <%
+                        if(vo.getC_list() != null && vo.getC_list().size() > 0)
+                            out.print("("+ vo.getC_list().size()+")");
+                    %>
                 </a></td>
             <td><%=vo.getWriter()%></td>
             <td><%=vo.getWrite_date()%></td>
             <td><%=vo.getHit()%></td>
         </tr>
 <%
-        }
+            i++; // 인덱스 값 증가
+        } // for end
     }
 %>
         </tbody>

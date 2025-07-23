@@ -6,7 +6,9 @@
 
     <resultMap id="map1" type="mybatis.vo.BbsVO">
         <id property="b_idx" column="b_idx"/>
+        <!-- BbsVO에 있는 멤버변수들 중 List<CommVO> c_list; -->
         <collection property="c_list" ofType="mybatis.vo.CommVO" select="comm.list" column="b_idx"/>
+        <!-- comm.list를 호출하면서 b_idx값을 인자로 보낸다. -->
     </resultMap>
 
     <!-- 총 게시물 수를 반환하는 기능 -->
@@ -28,9 +30,37 @@
     </select>
 
     <!-- 원글 저장 -->
+    <insert id="add" parameterType="Map">
+        INSERT INTO bbs_t(subject, writer, content, file_name, ori_name, ip, write_date, hit, bname, status)
+        VALUES(#{subject}, #{writer}, #{content}, #{fname}, #{oname}, #{ip}, NOW(), 0, #{bname}, 0)
+    </insert>
 
     <!-- 원글 삭제 -->
+    <update id="del" parameterType="String">
+        UPDATE bbs_t
+        SET status = 1
+        WHERE b_idx = #{bIdx}
+    </update>
+
+    <!-- 조회수 증가 -->
+    <update id="hit" parameterType="String">
+        UPDATE bbs_t
+        SET hit = hit + 1
+        WHERE b_idx = #{bIdx}
+    </update>
 
     <!-- 원글 수정 -->
+    <update id="correct" parameterType="mybatis.vo.BbsVO">
+        UPDATE bbs_t
+        SET subject = #{subject},
+        writer = #{writer},
+        content = #{content}
+        WHERE b_idx = #{b_idx}
+    </update>
 
+    <!-- list에서 글 선택 -->
+    <select id="getBbs" resultMap="map1" parameterType="String">
+        SELECT * FROM bbs_t
+        WHERE b_idx = #{bIdx}
+    </select>
 </mapper>

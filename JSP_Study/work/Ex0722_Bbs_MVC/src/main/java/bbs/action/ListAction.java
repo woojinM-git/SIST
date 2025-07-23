@@ -20,7 +20,7 @@ public class ListAction implements Action{
         int totalCount = BbsDAO.getTotalCount(bname);
 
         // 페이징 처리를 위한
-        Paging page = new Paging(10, 3);
+        Paging page = new Paging(4, 3);
         // numPerPage = 현재 보여지는 게시물의 수
         // pagePerBlock = 게시물 아래 보이는 10개씩 묶음 수
 
@@ -44,6 +44,7 @@ public class ListAction implements Action{
         // JSP에서 표현하기 위해 request에 저장
         request.setAttribute("ar", ar);
         request.setAttribute("page", page);
+        request.setAttribute("nowPage", page.getNowPage());
 
         return "list.jsp";
     }

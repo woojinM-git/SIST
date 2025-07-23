@@ -39,8 +39,77 @@ public class BbsDAO {
     }
     
     // 저장
-    
+    public static int add(String subject, String writer, String content, String fname, String oname, String ip, String bname){
+        int cnt = 0;
+        Map<String, String> map = new HashMap<>();
+        map.put("subject", subject);
+        map.put("writer", writer);
+        map.put("content", content);
+        map.put("fname", fname);
+        map.put("oname", oname);
+        map.put("ip", ip);
+        map.put("bname", bname);
+
+        SqlSession ss = fService.getFactory().openSession();
+        cnt = ss.insert("bbs.add", map);
+        if(cnt > 0)
+            ss.commit();
+        else
+            ss.rollback();
+        ss.close();
+
+        return cnt;
+    }
+
+    // 기본키를 인자로 하여 게시물 가져오기
+    public static BbsVO getBbs(String b_idx){
+        BbsVO vo = null;
+        SqlSession ss = fService.getFactory().openSession();
+        vo = ss.selectOne("bbs.getBbs", b_idx);
+        ss.close();
+        return vo;
+    }
+
     // 수정
+    public static int correct(String subject, String writer, String content, String b_idx){
+        System.out.println("BbsDAO.correct() : " + subject + " " + writer + " " + content + " " + b_idx);
+        BbsVO vo = new BbsVO();
+        vo.setSubject(subject);
+        vo.setWriter(writer);
+        vo.setContent(content);
+        vo.setB_idx(b_idx);
+
+        SqlSession ss = fService.getFactory().openSession();
+        int cnt = ss.delete("bbs.correct", vo);
+        if(cnt > 0)
+            ss.commit();
+        else
+            ss.rollback();
+        ss.close();
+        return cnt;
+    }
     
     // 삭제
+    public static int delBbs(String b_idx){
+        SqlSession ss = fService.getFactory().openSession();
+        int cnt = ss.delete("bbs.del", b_idx);
+        if(cnt > 0)
+            ss.commit();
+        else
+            ss.rollback();
+        ss.close();
+        return cnt;
+    }
+
+    // 조회수 증가
+    public static int hit(String b_idx){
+        SqlSession ss = fService.getFactory().openSession();
+        int cnt = ss.delete("bbs.hit", b_idx);
+        if(cnt > 0)
+            ss.commit();
+        else
+            ss.rollback();
+        ss.close();
+        return cnt;
+    }
 }

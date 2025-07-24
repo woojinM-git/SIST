@@ -15,9 +15,10 @@ public class SaveAction implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String viewPath = null;
 
-        String enc_type = request.getContentType();
+        // 요청시 contentType을 얻어낸다.
+        String enc_type = request.getContentType(); // ContentType으로 구분해야 한다.
 
-        if(enc_type == null) {
+        if(enc_type == null) { // get방식으로 오면 null이 저장되고 다시 correct.jsp로 보냄
             viewPath = "correct.jsp";
         } else if(enc_type.startsWith("multipart")){
             try{
@@ -29,16 +30,13 @@ public class SaveAction implements Action {
 
 
                 String title = mr.getParameter("title");
-                String writer = mr.getParameter("writer");
                 String content = mr.getParameter("content");
                 String b_idx = mr.getParameter("b_idx");
 
-                System.out.println("title : " + title);
-                System.out.println("writer : " + writer);
-                System.out.println("content : " + content);
-                System.out.println("b_idx : " + b_idx);
+                BbsVO bvo = BbsDAO.getBbs(b_idx);
+                request.setAttribute("bvo", bvo);
 
-                int cnt = BbsDAO.correct(title, writer, content, b_idx);
+                int cnt = BbsDAO.correct(title, content, b_idx);
                 if(cnt > 0) { // 저장됌
                     viewPath = "correct.jsp";
                     System.out.println("저장됌");

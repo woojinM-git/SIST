@@ -94,7 +94,7 @@
 
             <tr>
                 <td colspan="2">
-                    <input type="button" value="수정" onclick="correct()"/>
+                    <input type="button" value="수정" onclick="goEdit()"/>
                     <!-- 수정 버튼을 누르면 게시판 글쓰기 화면이 열리고 테이블 안에는 내용이 다 담겨있어야 한다.
                     수정 버튼을 누르면 내용이 업데이트 되어야 함 -->
                     <input type="button" value="삭제" onclick="openDel()"/>
@@ -196,10 +196,10 @@
     function close(){
         $("#del_dialog").dialog("close");
     }
-    function correct(){
-        console.log("correct");
+    function goEdit(){
+        console.log("goEdit");
         document.fcorrec.action = "Controller";
-        document.fcorrec.type.value = "correct";
+        document.fcorrec.type.value = "edit";
         document.fcorrec.submit();
     }
 </script>

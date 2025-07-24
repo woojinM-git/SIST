@@ -5,7 +5,7 @@ import mybatis.vo.BbsVO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CorrectAction implements Action{
+public class EditAction implements Action{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("CorrectAction.execute()");
@@ -24,6 +24,7 @@ public class CorrectAction implements Action{
         bvo.setB_idx(b_idx);
 
         request.setAttribute("bvo", bvo);
+        System.out.println("bvo : " + bvo);
 
         return "correct.jsp";
     }

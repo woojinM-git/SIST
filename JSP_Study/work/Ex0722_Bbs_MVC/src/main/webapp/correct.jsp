@@ -43,7 +43,7 @@
     .title{background:lightsteelblue}
 
     .odd {background:silver}
-
+    .t_bold { font-weight:bold; color:red }
 
   </style>
 </head>
@@ -66,7 +66,7 @@
       </tr>
       <tr>
         <th>이름:</th>
-        <td><input type="text" name="writer" id="writer" size="12" value="<%=bvo.getWriter()%>"/></td>
+        <td><input type="text" name="writer" id="writer" size="12" value="<%=bvo.getWriter()%>" disabled/></td>
       </tr>
       <tr>
         <th>내용:</th>
@@ -74,7 +74,15 @@
       </tr>
       <tr>
         <th>첨부파일:</th>
-        <td><input type="file" name="file" id="file"/></td>
+        <td><input type="file" name="file" id="file"/>
+        <%
+          if(bvo.getFile_name() != null){
+        %>
+          <p class="t_bold"><%= bvo.getFile_name()%></p>
+        <%
+          }
+        %>
+        </td>
       </tr>
       <!--
                       <tr>
@@ -86,7 +94,7 @@
         <td colspan="2">
           <input type="button" value="저장"
                  onclick="saveData()"/>
-          <input type="button" value="다시"/>
+          <input type="button" value="취소" onclick="goBack()"/>
           <input type="button" value="목록"/>
         </td>
       </tr>
@@ -158,7 +166,7 @@
     console.log("title : " + title);
     console.log("writer : " + writer);
     console.log("content : " + content);
-    // document.forms[0].submit();
+    document.forms[0].submit();
   }
 
   function sendImage(file, editor){
@@ -185,6 +193,14 @@
       // editor에 img태그를 넣어주면 된다
       $("#content").summernote("editor.insertImage", res.img_url);
     });
+  }
+
+  function goBack(){
+    console.log(${param.b_idx})
+    console.log(${param.cPage})
+    console.log("goBack");
+    // Controller?type=view&b_idx=5&cPage=1
+    location.href = "Controller?type=view&b_idx=${param.b_idx}&cPage=${param.cPage}";
   }
 </script>
 </body>

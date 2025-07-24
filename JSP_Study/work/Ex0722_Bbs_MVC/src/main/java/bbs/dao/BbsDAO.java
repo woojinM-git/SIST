@@ -71,11 +71,10 @@ public class BbsDAO {
     }
 
     // 수정
-    public static int correct(String subject, String writer, String content, String b_idx){
-        System.out.println("BbsDAO.correct() : " + subject + " " + writer + " " + content + " " + b_idx);
+    public static int correct(String subject, String content, String b_idx){
+        System.out.println("BbsDAO.correct() : " + subject + " " + content + " " + b_idx);
         BbsVO vo = new BbsVO();
         vo.setSubject(subject);
-        vo.setWriter(writer);
         vo.setContent(content);
         vo.setB_idx(b_idx);
 

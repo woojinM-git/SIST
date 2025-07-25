@@ -53,6 +53,7 @@
 </head>
 <body>
 
+<c:if test="${requestScope.vo != null}">
   <c:set var="vo" value="${requestScope.vo}"/>
 <div id="bbs">
   <form method="post" >
@@ -63,14 +64,14 @@
         <th>제목:</th>
         <td>${vo.subject}</td>
       </tr>
-
+      <c:if test="${vo.file_name ne null and vo.file_name.length() > 4}">
       <tr>
         <th>첨부파일:</th>
-        <td><a href="#">
+        <td><a href="javascript:down('${vo.file_name}')">
           ${vo.file_name}
         </a></td>
       </tr>
-
+      </c:if>
       <tr>
         <th>이름:</th>
         <td>${vo.writer}</td>
@@ -107,6 +108,7 @@
     <input type="hidden" name="type"/>
     <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
     <input type="hidden" name="cPage" value="${param.cPage}"/>
+    <input type="hidden" name="f_name"/>
   </form>
 
   <!-- 삭제시 보여주는 팝업창 -->
@@ -133,6 +135,17 @@
   </c:forEach>
 
 </div>
+</c:if>
+
+<%-- 표현할 vo객체가 존재하지 않는다면 원래 있던 목록 페이지로 이동한다. --%>
+<c:if test="${requestScope.vo eq null}">
+  <c:redirect url="Controller">
+    <c:param name="type" value="list"/>
+    <c:param name="cPage" value="${param.cPage}"/>
+  </c:redirect>
+</c:if>
+
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 <script>
@@ -164,6 +177,12 @@
   function goEdit() {
     document.ff.action = "Controller";
     document.ff.type.value = "edit";
+    document.ff.submit();
+  }
+
+  function down(fname) {
+    document.ff.action = "download.jsp";
+    document.ff.f_name.value = fname;
     document.ff.submit();
   }
 </script>

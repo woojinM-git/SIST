@@ -134,7 +134,7 @@
     </tfoot>
     <tbody>
     <c:set var="ar" value="${requestScope.ar}" scope="page"/>
-    <c:forEach var="num" items="${ar}" varStatus="i">
+    <c:forEach var="vo" items="${ar}" varStatus="i">
         <c:set var="num" value="${p.totalCount-((p.nowPage-1)*p.numPerPage+i.index)}"/>
     <tr>
       <td>${num}</td>

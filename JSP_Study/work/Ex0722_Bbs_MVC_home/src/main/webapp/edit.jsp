@@ -195,9 +195,6 @@
         location.href="Controller?type=view&b_idx=${param.b_idx}&cPage=${param.cPage}";
     }
 </script>
-<%
-    }//if문의 끝
-%>
 </body>
 </html>
 

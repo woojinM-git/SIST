@@ -96,14 +96,14 @@
 
 
     <input type="hidden" name="b_idx" value="${vo.b_idx}">
-    <input type="hidden" name="cPage" value="${cPage}"/>
+    <input type="hidden" name="cPage" value="${param.cPage}"/>
     <input type="hidden" name="type" value="commadd"/>
     <input type="submit" value="저장하기"/>
   </form>
 
   <form name="ff" method="post">
     <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
-    <input type="hidden" name="cPage" value="${cPage}"/>
+    <input type="hidden" name="cPage" value="${param.cPage}"/>
   </form>
 
   <!-- 삭제시 보여주는 팝업창 -->
@@ -113,7 +113,7 @@
       <p>정말로 삭제 하시겠습니까?</p>
       <input type="hidden" name="type" value="del"/>
       <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
-      <input type="hidden" name="cPage" value="${cPage}"/>
+      <input type="hidden" name="cPage" value="${param.cPage}"/>
       <button type="button" onclick="del(this.form)">삭제</button>
     </form>
   </div>

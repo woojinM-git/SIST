@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sist</groupId>
-    <artifactId>ex0828_bbs</artifactId>
+    <artifactId>ex0829_json</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>ex0828_bbs</name>
+    <name>ex0829_json</name>
     <packaging>war</packaging>
 
     <properties>
@@ -15,7 +15,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <junit.version>5.10.2</junit.version>
-        <springframework.version>4.3.0.RELEASE</springframework.version>
     </properties>
 
     <dependencies>
@@ -42,36 +41,68 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${springframework.version}</version>
+            <version>4.3.0.RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
+        <!-- 스프링버전 : 4.X.X일 경우 이 3가지 라이브러리 필요함 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <!-- 파일 전송을 위한 라이브러리 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
 
         <!--
-            스프링에서 mybatis를 연동하기 위해 필요한 라이브러리들!
-
-            spring-jdbc : 스프링버전
-            spring-tx : 스프링버전
-            commons-dbcp : 1.4버전 (database connection pull)
-            commons-pool : 1.6버전
-            mybatis : 3.5.19버전
-            mybatis-spring : 1.3.2버전
-            mysql : 8.3.0버전
-        -->
-
+           db 연결을 위한 라이브러리들
+         spring-jdbc
+         sprint-tx
+         commons-dbcp
+         commons-pool
+         mybatis
+         mybatis-spring
+         mysql
+         -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${springframework.version}</version>
+            <version>4.3.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>${springframework.version}</version>
+            <version>4.3.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>

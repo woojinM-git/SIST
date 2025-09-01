@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+
+    <!-- 반드시 원글의 기본키를 원자로 받아서 댓글들을 검색하여 반환한다. -->
+    <select id="list" resultType="jsonEx.output.EmpVO">
+        SELECT * FROM emp
+    </select>
+
+</mapper>

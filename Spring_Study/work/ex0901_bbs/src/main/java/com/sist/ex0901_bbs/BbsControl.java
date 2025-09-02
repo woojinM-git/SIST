@@ -5,17 +5,19 @@ import mybatis.dao.BbsDAO;
 import mybatis.vo.BbsVO;
 import mybatis.vo.ImgVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,9 @@ public class BbsControl {
     private HttpServletRequest request;
 
     @Autowired
+    private HttpServletResponse response;
+
+    @Autowired
     private ServletContext application;
 
     @Autowired
@@ -39,7 +44,7 @@ public class BbsControl {
     int pagePerBlock = 5;
 
     // 첨부파일들이 저장되는 곳
-    private String uploadPath = "/resources/upload";
+    private String upload_path = "/resources/upload";
 
     // 에디터에서 추가한 이미지파일들이 저장될 곳
     private String editor_path = "/resources/editor_img/";
@@ -78,18 +83,20 @@ public class BbsControl {
     }
 
     // 글 보기
-    @RequestMapping("/view")
+    @GetMapping("/view")
     public ModelAndView view(String bname, String b_idx, String cPage) {
         ModelAndView mv = new ModelAndView();
-
-        List<BbsVO> list = null;
+        ArrayList<BbsVO> list = null;
         // 세션으로부터 이름이 r_list라는 이름으로 저장된 객체를 얻어낸다.
         Object obj = session.getAttribute("r_list");
+
+        // obj가 null이 아니면 obj를 형변환해서 list에 저장하자
         if(obj != null)
-            list = (List<BbsVO>) obj;
+            list = (ArrayList<BbsVO>) obj;
         else {
             // 처음으로 게시판 들어온 경우
             list = new ArrayList<>();
+            // 새로 생성된 경우일때만 session에 저장
             session.setAttribute("r_list", list);
         }
 
@@ -219,5 +226,60 @@ public class BbsControl {
         // 수정이 완료되면 다시 해당 게시글을 보여줘야함
         mv.setViewName("redirect:/view?b_idx=" + vo.getB_idx());
         return mv;
+    }
+
+    @PostMapping("download")
+    public ResponseEntity<Resource> download(String f_name){
+        // 파일들이 저장되어 있는 곳 (bbs_upload)를 절대경로화 시키자
+        String realPath = application.getRealPath(upload_path+f_name);
+        File f = new File(realPath); //파일 객체를 만드는 이유 = 존재 여부 확인을 위해
+        if(f.exists()){ // 존재여부 확인
+            // 존재할 경우에만 요청한 곳으로 파일을 보내줘야 한다.
+            byte[] buf = new byte[4096];
+            int size = -1;
+            // 파일을 다운로드에 필요한 스트림 준비
+            BufferedInputStream bis = null;
+            FileInputStream fis = null;
+            BufferedOutputStream bos = null;
+            ServletOutputStream sos = null; // 응답을 하는 것이 접속자의
+            // 컴퓨터로 다운로드를 시켜야 하기 때문에 response를 통해
+            // OutputStream을 얻어내야 응답으로 다운로드가 되는 것이다.
+            // 그래서 response로 얻어내는 스트림이 ServletOutputStream이므로
+            // sos를 선언했다.
+            try{
+                // 접속자 화면에 다운로드 창 보여주기
+                response.setContentType("application/x-msdownload");
+                response.setHeader("Content-Disposition",
+                        "attachment;filename=" + new String(f_name.getBytes("8859_1")));
+                // 다운로드로 읽어낼 스트림 준비
+                fis = new FileInputStream(f);
+                bis = new BufferedInputStream(fis);
+
+                // response를 통해 다운로드할 스트림을 얻어낸다.
+                sos = response.getOutputStream();
+                bos = new BufferedOutputStream(sos);
+
+                while((size = bis.read(buf)) != -1){ // 저장할 파일이 있으면
+                    bos.write(buf, 0, size);
+                    bos.flush();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            } finally {
+                try{
+                    if(fis != null)
+                        fis.close();
+                    if(bis != null)
+                        bis.close();
+                    if(sos != null)
+                        sos.close();
+                    if(bos != null)
+                        bos.close();
+                }catch (Exception e){
+
+                }
+            }
+        }// if end
+        return null;
     }
 }

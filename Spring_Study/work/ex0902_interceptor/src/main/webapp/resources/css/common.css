@@ -1,0 +1,142 @@
+@charset "UTF-8";
+@import "reset.css";
+
+#wrap{
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+/***** 상단 영역 ******/
+#header{
+  width: 970px;
+  height: 120px;
+  margin: auto;
+  position: relative; /* 바깥의 박스는 상대적으로 지정하고 밑의 메뉴 작업에서 안의 포지션을 절대적으로 설정한뒤 0을 주면 맨 끝에 붙는다 */
+}
+/*
+header 안에 있는 h1 태그의 너비를 181 px로 하고, 높이는 59px로 하자!
+그리고 배경 이미지로는 img 폴더에 있는 logo.png로 지정한 후
+텍스트는 보이지 않도록 하자! */
+#header>h1{
+  width: 181px;
+  height: 59px;
+  background: url("../img/logo.png") no-repeat;
+  text-indent: -9999px;
+}
+/****** 메뉴 작업 ******/
+#header .gnb{ /* ul 태그를 의미 */
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+#header .gnb>li{
+  flex: 1 1 194px;
+  height: 100%; /* 50px */
+  background-color: #ff5001;
+}
+#header .gnb>li>a{
+  display: block; /* 인라인 안에 블록 들어갈 순 없다 ***** */
+  width: auto;
+  height: 100%;
+  text-align: center;
+}
+#header .gnb>li>a>span.menu{
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 15px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  background: url("../img/gnb_bult.png") no-repeat;
+  padding-left: 25px;
+}
+/* 각 메뉴들의 아이콘 변경 */
+#header .gnb>li>a>span.m01{
+  background-position: 0 0;
+}
+#header .gnb>li>a>span.m02{
+  background-position: 0 -22px;
+}
+#header .gnb>li>a>span.m03{
+  background-position: 0 -44px;
+}
+#header .gnb>li>a>span.m04{
+  background-position: 0 -66px;
+}
+#header .gnb>li>a>span.m05{
+  background-position: 0 -88px;
+}
+
+/**** footer 영역 ****/
+#footer{
+  width: auto;
+  /* 안쪽 여백 좌/우 0px로 하고, 위쪽은 40px로, 아래쪽은 50px로 지정하자 */
+  padding: 40px 0 50px; /* 3개 짜리면 위쪽 좌/우 아래쪽 순서 */
+  background: #eee;
+  margin-top: 50px;
+}
+#footer .footer_area{
+  width: 900px;
+  margin: auto;
+}
+#footer .footer_guide{
+  padding-bottom: 20px;
+  overflow: hidden;
+}
+#footer .footer_guide li{
+  display: inline-block;
+  padding: 0 10px; /* 위아래 / 좌우 */
+  border-right: 1px solid #999;
+}
+#footer .footer_guide li:last-child{ /* li 태그들 중 가장 마지막인 요소 - last-child에 있는 오른쪽 선 없애기
+                                       nth-child(n) - n번째 요소를 뜻함 */
+  border-right: none;
+}
+#footer .footer_guide li a {
+  color: #777;
+  font-size: 12px;
+  font-weight: bold;
+}
+#footer .footer_guide li a:hover{
+  color: #ff4f00;
+}
+#footer address{
+  font-size: 12px;
+  color: #777;
+  padding-bottom: 6px;
+}
+#footer .copyright{
+  font-size: 11px;
+}
+
+/********
+기타 스타일
+*********/
+.ellip{/* 문자열이 공간에 맞도록 줄임표 표현 */
+  display: inline-block;
+  width: 97%; /* 스페이스, 탭 줄바꿈 등을 공백 1칸으로 표시 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/********
+버튼 스타일
+*********/
+.btn_center{
+  text-align: center;
+}
+.btn{
+  display: inline-block;
+  background: url("../img/btn.png") no-repeat;
+  text-indent: -9999px;
+}
+.btn a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}

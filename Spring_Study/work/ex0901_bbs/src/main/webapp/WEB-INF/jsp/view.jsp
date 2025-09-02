@@ -64,7 +64,7 @@
 
       <tr>
         <th>첨부파일:</th>
-        <td><a href="#">
+        <td><a href="">
           ${vo.file_name}
         </a></td>
       </tr>
@@ -103,6 +103,7 @@
 
   <form name="ff" method="post">
     <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
+    <input type="hidden" name="f_name"/>
     <input type="hidden" name="writer" value="${vo.writer}"/>
     <input type="hidden" name="cPage" value="${param.cPage}"/>
   </form>
@@ -112,7 +113,7 @@
     <form action="/del" method="post">
       <%--비밀번호 표현등 할 수 있음 --%>
       <p>정말로 삭제 하시겠습니까?</p>
-      <input type="hidden" name="type" value="del"/>
+      <input type="hidden" name="bname" value="${param.bname}"/>
       <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
       <input type="hidden" name="cPage" value="${param.cPage}"/>
       <button type="button" onclick="del(this.form)">삭제</button>
@@ -129,7 +130,6 @@
   </div>
   <hr/>
   </c:forEach>
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -146,7 +146,6 @@
   });
 
   function goList() {
-    console.log(${param.cPage});
     document.ff.action = "list";
     document.ff.submit();
   }
@@ -162,6 +161,10 @@
 
   function goEdit() {
     document.ff.action = "/edit";
+    document.ff.submit();
+  }
+  function down(){
+    document.ff.action = "/download";
     document.ff.submit();
   }
 </script>

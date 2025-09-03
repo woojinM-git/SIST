@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<members>
+    <member>
+        <name>마루치</name>
+        <email>maru@naver.com</email>
+        <phone>01012345678</phone>
+    </member>
+    <member>
+        <name>남도일</name>
+        <email>nam@gmail.com</email>
+        <phone>01019876543</phone>
+    </member>
+    <member>
+        <name>이도</name>
+        <email>edo@naver.com</email>
+        <phone>01055556666</phone>
+    </member>
+</members>

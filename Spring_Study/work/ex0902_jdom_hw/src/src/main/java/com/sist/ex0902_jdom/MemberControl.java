@@ -87,7 +87,6 @@ public class MemberControl {
 
         // 각각의 Element들을 MemberVO로 생성해야함
         System.out.println(ar.length);
-        MemberVO[] searchAr = new MemberVO[ar.length]; // 멤버변수의 배열과 같은 길이로 생성
         if(ar != null && ar.length > 0){ // 멤버변수의 ar 값이 들어있을때만 수행
             for(int i = 0; i < ar.length; i++){
                 String name = ar[i].getName();
@@ -115,15 +114,20 @@ public class MemberControl {
                             chk = true;
                         break;
                 } // switch의 끝
+
                 // chk가 true일때만 배열에 저장
-                if(chk)
-                    searchAr[i] = m; // switch를 지나서 통과한 ar[i]에 저장
-                else
-                    searchAr[i] = null; // 혹시몰라 null 넣기
+                if(chk){
+                    System.out.println(chk);
+                    // switch를 지나서 통과한 ar[i]에 저장
+                    ar[i] = m;
+                }else {
+                    // 이미 배열에 값이 담겨있어서 chk가 false인 경우에는 null을 보내야 의도대로 나옴
+                    ar[i] = null;
+                }
             } // for end
         }
-        map.put("ar", searchAr);
-        map.put("length", searchAr.length);
+        map.put("ar", ar);
+        map.put("length", ar.length);
 
         return map;
     }

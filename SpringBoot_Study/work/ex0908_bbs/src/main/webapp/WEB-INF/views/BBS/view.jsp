@@ -64,9 +64,11 @@
 
       <tr>
         <th>첨부파일:</th>
-        <td><a href="">
-          ${vo.file_name}
-        </a></td>
+        <td>
+          <a href="javascript:down()">
+            ${vo.file_name}
+          </a>
+        </td>
       </tr>
 
       <tr>
@@ -82,7 +84,6 @@
         <td colspan="2">
           <input type="button" value="수정" onclick="goEdit()"/>
           <input type="button" value="삭제" onclick="goDel()"/>
-          <%--<input type="button" value="목록" onclick="javascript:location.href='Controller?type=list&cPage=${param.cPage}'"/>--%>
           <input type="button" value="목록" onclick="goList()"/>
         </td>
       </tr>
@@ -103,9 +104,10 @@
 
   <form name="ff" method="post">
     <input type="hidden" name="b_idx" value="${vo.b_idx}"/>
-    <input type="hidden" name="f_name"/>
+    <input type="hidden" name="f_name" value="${vo.file_name}"/>
     <input type="hidden" name="writer" value="${vo.writer}"/>
-    <input type="hidden" name="cPage" value="${param.cPage}"/>
+    <input type="hidden" name="bname" value="${bname}"/>
+    <input type="hidden" name="cPage" value="${cPage}"/>
   </form>
 
   <!-- 삭제시 보여주는 팝업창 -->

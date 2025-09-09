@@ -16,4 +16,8 @@ public interface BbsMapper {
     int add(BbsVO vo);
 
     BbsVO getBbs(String b_idx);
+
+    int hit(String b_idx);
+
+    int edit(BbsVO vo);
 }

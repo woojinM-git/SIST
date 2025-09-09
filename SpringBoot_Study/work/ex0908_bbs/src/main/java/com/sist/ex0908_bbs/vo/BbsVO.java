@@ -13,9 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BbsVO {
-    private String b_idx, subject, writer, content, 
-        file_name, ori_name, pwd, 
-        write_date, ip, hit, bname, status;
+    private String b_idx, subject, writer, content, file_name, ori_name, pwd, 
+        write_date, ip, bname, status;
+    private int hit;
 
     private List<CommVO> c_list; //댓글들
     private MultipartFile file; //첨부파일

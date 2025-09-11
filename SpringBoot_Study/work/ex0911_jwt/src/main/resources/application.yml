@@ -1,0 +1,8 @@
+# 들여쓰기 잘 지켜서 작성
+spring:
+    profiles:
+        active: dev # 활성화는 application-dev.yml파일로 함
+        include: secret # 이 문서안에 application-secret.yml파일의 내용을 포함한다
+
+# spring.profiles.acition = dev
+# spring.profiles.include = secret

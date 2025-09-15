@@ -27,6 +27,7 @@ public class JwtProvider {
     public SecretKey getSecretKey(){
         if(secretKey == null){
             String encoding = Base64.getEncoder().encodeToString(secretKeyCode.getBytes());
+            // Base64 : 암호화
 
             // scretkey는 숫자와 문자들을 마음대로 길게 기술한 것이다.(별 의미없음)
             // 그 값(secretKeyCode)을 가지고 jwt키를 만들어야 한다. 이때
@@ -39,11 +40,15 @@ public class JwtProvider {
     public String genToken(Map<String, Object> map, int seconds){
         long now = new Date().getTime();
         Date accessTokenExpiresIn = new Date(now+1000L*seconds);
+        // 컴퓨터는 밀리초 단위로 움직이기 때문에
         // 1000L*seconds : 밀리초로 변환
 
         JwtBuilder jwtBuilder = Jwts.builder().subject("SIST")
                                     .expiration(accessTokenExpiresIn);
                                     
+        // Map구조는 index가 없어서 반복문을 수행하게 하기 위해서는 index를 만들어줘야한다
+        // Iterator는 Set구조의 있는 나열화 시키는 객체인데 Map을 Set구조로 만들고,
+        // Set에 Iterator를 지정하여 반복문처리 -> key와 value를 얻어낸다.
         Set<String> keys = map.keySet(); // 반복자 처리하기 위해 Set 구조화
         Iterator<String> it = keys.iterator();
         while(it.hasNext()){
@@ -59,6 +64,7 @@ public class JwtProvider {
                     이 세가지 중 Payload(데이터) 안에 들어있는 정보(data) 단위를 Claim 이라 한다.
              */
         } // while end
+        // 서명한다
         String jwt = jwtBuilder.signWith(getSecretKey()).compact();
 
         return jwt;
@@ -66,13 +72,13 @@ public class JwtProvider {
 
     // 토큰이 만료되었는지? 확인
     public boolean verify(String token){
-        boolean value = false;
+        boolean value = true;
 
         try{
             Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token);
         } catch (Exception e) {
             // 유효기간이 만료되면 예외발생됨
-            value = true;
+            value = false;
         }
 
         return value;

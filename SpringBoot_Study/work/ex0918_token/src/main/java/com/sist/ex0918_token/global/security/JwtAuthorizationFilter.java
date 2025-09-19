@@ -33,7 +33,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter{
         // 쿠키에 있는 accessToken을 빼 와서 확인하자
             // verify access 토큰 검사
             // 만약 aceess가 만료라면 DB에 refresh 토큰 검사
-            // 또 만약 refresh까지 만료라면 
+            // 또 만약 refresh까지 만료라면
             // 다시 로그인하도록 유도
         String accessToken = null; // 좀있다가 하자
         if(!accessToken.isBlank()){ 

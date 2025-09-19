@@ -1,11 +1,16 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Page(){
 
     // 서버 URL
+    let api_url = "/api/bbs/write"
+
+    const router = useRouter();
 
     // 사용자가 입력한 값들을 하나의 객체로 저장할 곳
     const [bbs, setBbs] = useState({});
@@ -18,6 +23,18 @@ export default function Page(){
 
     function sendBbs(){
         // 비동기식 통신(스프링부트 서버 호출)
+        axios.post(api_url, 
+            JSON.stringify(bbs), // bbs가 json으로 바뀌어 전달됌
+            {
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            }
+        ).then(function (json){
+            if(json.data.msg = "success")
+                router.push("/board"); // 게시판 목록화면 이동
+        })
+
     }
 
     return(

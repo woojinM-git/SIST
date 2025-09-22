@@ -2,7 +2,7 @@
 import { Box, Grid } from "@mui/material";
 import Link from "next/link";
 
-function Nav(){
+function Nav(accessToken){
     let leftItem = [
         {title:"Home", path:"/Home"}, 
         {title:"Members", path:"/Members"}, 
@@ -27,10 +27,19 @@ function Nav(){
                     <div style={{paddingLeft: "10px"}}>Board</div>
                 </Link>
             </div>
+
             <div style={{display: "flex", position: "absolute", right: "10px"}}>
-                <Link href="/members/login">
-                    <div style={{paddingLeft: "10px"}}>Login</div>
-                </Link>
+                {
+                    accessToken == null
+                    ? <Link href="/members/login">
+                        <div style={{paddingLeft: "10px"}}>Login</div>
+                    </Link>
+
+                    : <Link href="/members/login">
+                        <div style={{paddingLeft: "10px"}}>Logout</div>
+                    </Link>
+
+                }
                 <Link href="/members/signup">
                     <div style={{paddingLeft: "10px"}}>Signup</div>
                 </Link>

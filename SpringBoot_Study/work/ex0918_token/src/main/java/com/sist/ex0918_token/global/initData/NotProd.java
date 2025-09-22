@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sist.ex0918_token.domain.bbs.entity.sevice.BbsService;
-import com.sist.ex0918_token.domain.member.entity.Member;
 import com.sist.ex0918_token.domain.member.service.MemberService;
 
 @Configuration
@@ -17,11 +16,11 @@ public class NotProd {
 
     @Bean
     CommandLineRunner initData(BbsService bbsService, MemberService memberService, PasswordEncoder passwordEncoder){
-        String pwd = passwordEncoder.encode("1111");
+        // String pwd = passwordEncoder.encode("1111");
 
         return args -> {
-            memberService.join("dojin", "도진", pwd);
-            memberService.join("admin", "관리자", pwd);
+            memberService.join("dojin", "도진", "1111");
+            memberService.join("admin", "관리자", "1111");
 
             bbsService.save("제목1", "마루치", "테스트입니다.");
             bbsService.save("제목2", "아라치", "테스트입니다.");

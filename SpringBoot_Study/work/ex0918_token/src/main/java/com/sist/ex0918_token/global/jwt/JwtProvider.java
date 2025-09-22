@@ -74,22 +74,14 @@ public class JwtProvider {
     }
 
     // 토큰이 만료되었는지? 확인
-    public boolean verify(String accessToken, String refreshToken){
+    public boolean verify(String accessToken){
         boolean value = true;
 
         try{
             Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(accessToken);
         } catch (Exception e) {
-            // refresh 검사
-            try{
-                Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(refreshToken);
-                // 토큰에 들어있는 mid만 있으면 authAndMakeToken를 호출해서 
-                // 새로운 토큰 발급 가능
-                
-            } catch (Exception a) {
-                // 유효기간이 만료되면 예외발생됨
-                value = false;
-            }
+            // 예외 발생 시 false 반환
+            value = false;
         }
 
         return value;
@@ -101,5 +93,15 @@ public class JwtProvider {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
+    }
+
+    // Access토큰 재발급
+    public String getAccessToken(Map<String, Object> map){
+        return genToken(map, 60*5);
+    }
+
+    // Refresh토큰 재발급
+    public String getRefreshToken(Map<String, Object> map){
+        return genToken(map, 60*60*24*100);
     }
 }

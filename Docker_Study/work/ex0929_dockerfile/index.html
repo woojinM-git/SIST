@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #header{
+      height: 80px;
+      color: black;
+      background-color: lightgray;
+    }
+    #nav{
+      list-style: none;
+      font: 22px Arial;
+      line-height: 80px;
+      padding-left: 170px;
+    }
+    #nav>li{
+      display: inline-block;
+      margin-left: 20px;
+    }
+    #nav>li>a{
+      color: white;
+      text-decoration: none;
+    }
+    #nav>li>a:hover{ color: skyblue; }
+
+    /* 선택된 메뉴를 의미하는 CSS */
+    .selected{
+      color: orange !important;
+      font-weight: bold;
+      border-bottom: 4px solid orange;
+    }
+
+  </style>
+</head>
+<body>
+  <article>
+    <header id="header">
+      <ul id="nav">
+        <li><a href="">Home</a></li>
+        <li><a href="" class="selected">Products</a></li>
+        <li><a href="">e-Biz</a></li>
+        <li><a href="">Board</a></li>
+        <li><a href="">About</a></li>
+      </ul>
+    </header>
+
+<div style="width: 90%; margin: auto;">
+	<h1>쌍용교육센터</h1>
+	<h2>First Page:Docker</h2>
+</div>
+
+  </article>
+</body>
+</html>

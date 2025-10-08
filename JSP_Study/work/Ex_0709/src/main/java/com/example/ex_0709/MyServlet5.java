@@ -1,4 +1,4 @@
-package org.example.ex_0709;
+package com.example.ex_0709;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;

@@ -5,7 +5,9 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     networks:
-     - sist_net
+      - sist_net
+    ports:
+      - "3000:3000"
 
   nginx:
     image: nginx:alpine
@@ -14,7 +16,7 @@ services:
     restart: always
     volumes:
       - ./conf/default.conf:/etc/ngins/nginx.conf:ro
-    prots:
+    ports:
       - "80:80"
     depends_on:
       - frontend

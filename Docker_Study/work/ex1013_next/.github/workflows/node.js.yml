@@ -1,0 +1,55 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+    - name: Copy Files to EC2
+      run: |
+        scp -r -o StrictHostKeyChecking=no ./* ubuntu@${{ secrets.HOST }}:/home/ubuntu/sist_next
+        # scp: 로컬과 원격 시스템 간 파일을 안전하게 복사하는 명령
+        # -r : 하위 디렉토리 포함해서 복사
+        # -o StrictHostKeyChecking=no : SSH접속 시 처음 서버의 호스트 키 체크 과정을 생략함!
+        #  다시 말해서 호스트 키 바뀜 등에 대해 물어보지 않고 자동으로 진행해 CI/CD환경 등에서 오류 방지함
+        #  이렇게 여러 명령어들을 전송할 때 사용함
+    - name: npm패키지 설치
+      run: npm install
+    - name: 사용자를 Docker그룹에 추가
+      run: |
+        sudo usermod -aG docker $USER
+    - name: 도커 세션 로드하기
+      run: | 
+        sudo chmod 666 /var/run/docker.sock
+    - name: 쉘상의 EC2 접근과 도커 compose실행
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.HOST }} << 'EOF'
+        # 여러 줄의 명령어들을 SSH를 통해 원격으로 EC2섭에 전송할 수 있게 한다. EOF로 끝을 알려준다.
+          cd /home/ubuntu/sist_next
+          docker-compose down
+        # 위는 현재 실행 중인 모든 컨테이너, 볼륨, 이미지, 네트워크 들을 한번에 중지, 삭제한다.
+          docker-compose up -d --build
+        # --build옵션: 도커 이미지를 새롭게 빌드한 후 컨테이너를 실행
+        EOF

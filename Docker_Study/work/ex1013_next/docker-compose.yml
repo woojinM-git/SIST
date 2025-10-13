@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: frontend
+    networks:
+     - sist_net
+
+  nginx:
+    image: nginx:alpine
+    networks:
+      - sist_net
+    restart: always
+    volumes:
+      - ./conf/default.conf:/etc/ngins/nginx.conf:ro
+    prots:
+      - "80:80"
+    depends_on:
+      - frontend
+
+networks:
+  sist_net:
+    driver: bridge
+    external: true # 기존 존재하는 Network를 사용

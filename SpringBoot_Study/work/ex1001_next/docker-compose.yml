@@ -1,0 +1,32 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    volumes:
+      - static-files:/app/out
+    networks:
+      - sist_net
+
+  nginx:
+    image: nginx:alpine
+    networks:
+      - sist_net
+    restart: always
+    volumes:
+      # 빌드된 정적 파일을 nginx가 서빙할 경로에 마운트(읽기 전용)
+      # - static-files:/usr/share/nginx/html:ro
+      # 커스텀 nginx 설정 파일 마운트
+      - ./conf/default.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+
+    depends_on:
+      - frontend
+volumes:
+  static-files:
+
+networks:
+  sist_net:
+    driver: bridge

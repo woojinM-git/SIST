@@ -1,0 +1,60 @@
+services:
+  mysql80:
+    image: my_sql8
+    container_name: mysql80
+    networks:
+      - sist_net
+    volumes:
+      - ./backend/db/conf.d/mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
+      - ./backend/db/data:/var/lib/mysql
+      - ./backend/db/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ./backend/.env
+    ports:
+      - "3307:3306"
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    networks:
+      - sist_net
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql80
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql80:3306/my_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=1111
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    networks:
+      - sist_net
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:alpine
+    networks:
+      - sist_net
+    restart: always
+    volumes:
+      - ./conf/default.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - frontend
+
+networks:
+  sist_net:
+    driver: bridge

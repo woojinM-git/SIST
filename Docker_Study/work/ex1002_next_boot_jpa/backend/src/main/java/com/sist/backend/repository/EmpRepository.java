@@ -15,7 +15,7 @@ public interface EmpRepository extends JpaRepository<Emp, Long> {
     List<Emp> findByDeptno(String deptno);
     List<Emp> findByJobAndDeptno(String job, String deptno);
 
-    @Query(value = "select * from emp where job like concat('%', ?1, '%') and deptno=:?2", nativeQuery = true)
+    @Query(value = "select * from emp where job like concat('%', ?1, '%') and deptno=?2", nativeQuery = true)
     List<Emp> findByJobListAndDeptno(String job, String deptno);
 
     List<Emp> findByJobContainingAndDeptno(String job, String deptno);

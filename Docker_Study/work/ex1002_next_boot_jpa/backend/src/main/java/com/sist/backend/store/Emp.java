@@ -36,6 +36,6 @@ public class Emp {
 
     @ManyToOne(fetch = FetchType.LAZY) // 필요할 때 까지 로드되지 않는다.
     @JoinColumn(name = "deptno", referencedColumnName = "deptno")
-    // @JsonIgnoreProperties({"elist"}) // 반대로 Emp에서는 Dept의 elist를 무시해야 참조가 안돼 배열 중복이 안됌
+    @JsonIgnoreProperties({"elist"}) // 반대로 Emp에서는 Dept의 elist를 무시해야 참조가 안돼 배열 중복이 안됌
     private Dept dept;
 }

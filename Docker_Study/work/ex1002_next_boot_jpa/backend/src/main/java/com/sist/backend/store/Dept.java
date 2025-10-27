@@ -45,10 +45,8 @@ public class Dept {
     // CasecadeType.ALL : 모든 작업(저장, 병합, 삭제 등)을 자식 객체에도 적용
     // FetchType.LAZY : 필요할 때 연관된 엔티티를 로딩하도록 지정
     //      예) Dept엔티티가 로딩될 때 Emp엔티티는 실제로 필요할 때까지 로딩 안한다.
-    private int length = 1;
 
     public void setElist(List<Emp> elist) {
         this.elist = elist;   // elist 자체도 세팅
-        this.length = elist != null ? elist.size() : 0;
     }
 }

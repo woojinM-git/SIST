@@ -62,7 +62,7 @@ async def call_claude(prompt:str, model:str = "claude-3-5-haiku-latest") -> str:
 async def main():
     print("동시에 API 호출하기 (재시도 로직 포함)")
     prompt = "Visual Studio Code를 포크해서 만들어진 통합 개발 환경 Cursor에 대해 간략하게 300자 내로 설명해봐"
-    result = await call_claude(prompt)
+    result = call_claude(prompt)
 
     try:
         # gatther는 전체 작업 중 하나라도 실패하면 예외 발생

@@ -65,7 +65,7 @@ async def post_chat(user_message:str = Form(...)): # user_message:str = Form(...
     return await get_root()
 
 
-# 어린왕자 페르소나 프롬프트
+# 어린왕자 페르소나 프롬프트(System Prompt)
 persona_prompt = (
     "너는 생테쥐베르 소설에 나오는 어린 왕자야. 너는 순수하고 호기심이 많으며, 세상을 탐험하는 것을 좋아해. "
     "너는 사람들과 쉽게 친구가 되고, 그들에게 따뜻한 조언을 해주는 것을 즐겨. "
